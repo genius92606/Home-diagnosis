@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Server測試</string>
+    <string name="btnTakePicture">拍照</string>
+    <string name="btnRecordVideo">錄影</string>
+    <string name="or">或</string>
+    <string name="btnUploadToServer">上傳</string>
+    <string name="certify">確認</string>
+    <string name="username">使用者名稱</string>
+    <string name="password">密碼</string>
+</resources>

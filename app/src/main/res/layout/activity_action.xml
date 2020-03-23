@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="0dp"
+        android:layout_weight=".45"
+        >
+
+        <Button
+            android:id="@+id/action1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight=".2"
+            android:background="@drawable/example"
+            android:gravity="bottom|right"
+            android:text="動作1"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:layout_marginStart="20dp" />
+
+        <Button
+            android:id="@+id/action2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight=".2"
+            android:background="@drawable/example"
+            android:gravity="bottom|right"
+            android:text="動作2"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/action3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight=".2"
+            android:background="@drawable/example"
+            android:gravity="bottom|right"
+            android:text="動作3"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/action4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight=".2"
+            android:background="@drawable/example"
+            android:gravity="bottom|right"
+            android:text="動作4"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+
+        android:layout_marginBottom="20dp"
+        android:layout_weight=".45"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/action5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight=".2"
+            android:background="@drawable/example"
+            android:gravity="bottom|right"
+            android:text="動作5"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:layout_marginStart="20dp" />
+
+        <Button
+            android:id="@+id/action6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight=".2"
+            android:background="@drawable/example"
+            android:gravity="bottom|right"
+            android:text="動作6"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:layout_marginStart="20dp" />
+
+        <Button
+            android:id="@+id/action7"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight=".2"
+            android:background="@drawable/example"
+            android:gravity="bottom|right"
+            android:text="動作7"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/action8"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight=".2"
+            android:background="@drawable/example"
+            android:gravity="bottom|right"
+            android:text="動作8"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</LinearLayout>
