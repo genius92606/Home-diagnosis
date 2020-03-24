@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -68,10 +69,11 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
 
     private Uri fileUri; // file url to store image/video
 
-    private Button btnRecordVideo;
+    private Button btnRecordVideo,btnChangeCamera;
 
     private static int act;
     private static String username, password;
+
 
 
     private Camera mCamera;
@@ -80,6 +82,8 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
 
 
 
+    int whichCamera=1;
+    int maxSize=1080;
     private boolean isRecording = false;
 
     @Override
@@ -123,7 +127,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             EasyPermissions.requestPermissions(this, "We need permissions because this and that",123,perms);
         }
 
-        mCamera = getCameraInstance();
+        mCamera = getCameraInstance(whichCamera);
 
 
         Camera.Parameters params = mCamera.getParameters();
@@ -132,6 +136,20 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             // Autofocus mode is supported
             params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
             mCamera.setParameters(params);
+        }
+
+        List<Camera.Size> sizeList = mCamera.getParameters().getSupportedVideoSizes();
+        if (sizeList.get(0).height>=1080) {
+            Log.d("Camera","Set record quality to 1080");
+            maxSize=1080;
+        }
+        else if(sizeList.get(0).height<1080&&sizeList.get(0).height>=720){
+            Log.d("Camera","Set record quality to 720");
+            maxSize=720;
+        }
+        else{
+            Log.d("Camera","Set record quality to 480");
+            maxSize=480;
         }
 
 
@@ -152,7 +170,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         initListener();
 
 
-        mCamera = getCameraInstance();
+        mCamera = getCameraInstance(whichCamera);
 
 
         Camera.Parameters params = mCamera.getParameters();
@@ -174,6 +192,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         //mShowImage=(ImageView) findViewById(R.id.show_image);
         // btnCapturePicture = (Button) findViewById(R.id.btnCapturePicture);
         btnRecordVideo = (Button) findViewById(R.id.btnRecordVideo);
+        btnChangeCamera = (Button)findViewById(R.id.btnChangeCamera);
     }
     private void initListener(){
 
@@ -192,6 +211,16 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             }
         });
 
+        btnChangeCamera.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // record video
+
+
+                changeCamera();
+            }
+        });
     }
 
     private File createImageFile() throws IOException {
@@ -217,12 +246,61 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
     private boolean isDeviceSupportCamera() {
         if (getApplicationContext().getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_CAMERA)) {
+            int numbers=Camera.getNumberOfCameras();
+            Toast.makeText(getApplicationContext(),
+                    String.valueOf(numbers), Toast.LENGTH_LONG)
+                    .show();
             // this device has a camera
             return true;
         } else {
             // no camera on this device
             return false;
         }
+    }
+
+
+    private void changeCamera(){
+
+        mCamera.stopPreview();
+        mCamera.release();
+        if (whichCamera==0) //如果是後鏡頭的話
+        {
+            whichCamera=1;
+            btnChangeCamera.setBackgroundResource(R.drawable.flip_front);
+
+
+        }
+        else{
+            whichCamera=0;
+            btnChangeCamera.setBackgroundResource(R.drawable.flip_back);
+        }
+        mCamera = getCameraInstance(whichCamera);
+        List<Camera.Size> sizeList = mCamera.getParameters().getSupportedVideoSizes();
+        /*        String[] textArray = new String[sizeList.size()];
+        for (int i = 0; i < sizeList.size(); i++) {
+            textArray[i] = String.valueOf(sizeList.get(i).width) + ", " + sizeList.get(i).height;
+            Log.d("Camera", textArray[i]);
+        }*/
+
+        if (sizeList.get(0).height>=1080)
+        {
+            Log.d("Camera","Set record quality to 1080");
+            maxSize=1080;
+        }
+        else if(sizeList.get(0).height<1080&&sizeList.get(0).height>=720){
+            Log.d("Camera","Set record quality to 720");
+            maxSize=720;
+        }
+        else{
+            Log.d("Camera","Set record quality to 480");
+            maxSize=480;
+        }
+
+        //Log.d("Camera", String.valueOf(sizeList.get(0).height));
+
+        mPreview = new CameraPreview(this, mCamera);
+        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+        preview.addView(mPreview);
     }
 
     /**
@@ -256,7 +334,8 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             mCamera.lock();         // take camera access back from MediaRecorder
 
             // inform the user that recording has stopped
-            btnRecordVideo.setText("錄影");
+            //btnRecordVideo.setText("錄影");
+            btnRecordVideo.setBackgroundResource(R.drawable.video_camera);
             //setCaptureButtonText("Capture");
             isRecording = false;
             /*
@@ -284,7 +363,8 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
                 mediaRecorder.start();
 
                 // inform the user that recording has started
-                btnRecordVideo.setText("停止");
+                //btnRecordVideo.setText("停止");
+                btnRecordVideo.setBackgroundResource(R.drawable.video_camera_work);
                 //setCaptureButtonText("Stop");
                 isRecording = true;
             } else {
@@ -323,7 +403,9 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
 
     private boolean prepareVideoRecorder(){
 
-        mCamera = getCameraInstance();
+        mCamera.stopPreview();
+        mCamera.release();
+        mCamera = getCameraInstance(whichCamera);
         mediaRecorder = new MediaRecorder();
 
         // Step 1: Unlock and set camera to MediaRecorder
@@ -335,7 +417,13 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
         // Step 3: Set a CamcorderProfile (requires API Level 8 or higher)
-        mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
+        if(maxSize==1080)
+            mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_1080P));
+        else if(maxSize==720)
+            mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_720P));
+        else
+            mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_480P));
+
 
         // Step 4: Set output file
         File temp=getOutputMediaFile(MEDIA_TYPE_VIDEO);
@@ -383,10 +471,10 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         }
     }
 
-    public static Camera getCameraInstance(){
+    public static Camera getCameraInstance(int whichCamera){
         Camera c = null;
         try {
-            c = Camera.open(); // attempt to get a Camera instance
+            c = Camera.open(whichCamera); // attempt to get a Camera instance
         }
         catch (Exception e){
             // Camera is not available (in use or does not exist)

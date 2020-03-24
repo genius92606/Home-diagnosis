@@ -55,4 +55,7 @@
         android:text="@string/certify"
         android:textColor="@android:color/white" />
 
+
+/>
+
 </RelativeLayout>

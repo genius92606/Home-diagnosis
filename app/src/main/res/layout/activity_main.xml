@@ -61,16 +61,47 @@
 
     </FrameLayout>
 
-    <Button
-        android:id="@+id/btnRecordVideo"
+    <LinearLayout
+
+        android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_weight=".05"
-        android:layout_height="34dp"
-        android:layout_gravity="center"
+        android:layout_height="match_parent">
 
-        android:background="@color/btn_bg"
-        android:text="@string/btnRecordVideo"
-        android:textColor="@color/white" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".225"/>
+
+        <Button
+            android:id="@+id/btnChangeCamera"
+            android:layout_width="32dp"
+            android:layout_height="0dp"
+            android:layout_weight=".05"
+            android:background="@drawable/flip_front"
+            android:layout_gravity="center_horizontal"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".225" />
+
+        <Button
+            android:id="@+id/btnRecordVideo"
+            android:layout_width="32dp"
+            android:layout_height="0dp"
+            android:layout_weight=".05"
+            android:layout_gravity="center_horizontal"
+
+
+            android:background="@drawable/video_camera" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".45" />
+
+    </LinearLayout>
 
 </LinearLayout>
 </RelativeLayout>
