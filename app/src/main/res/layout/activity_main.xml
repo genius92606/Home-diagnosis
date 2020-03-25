@@ -9,99 +9,114 @@
 
     >
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <FrameLayout
-        android:id="@+id/example"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight=".3"
-        >
+        android:baselineAligned="false">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/example"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".3"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="動作示範"
-                app:layout_constraintBottom_toTopOf="@+id/imageView3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".25">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="動作示範"
+                    android:textSize="18sp" />
+            </FrameLayout>
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
-
-
-                android:layout_height="300dp"
-                android:background="@drawable/example"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="0dp">
+                android:layout_height="0dp"
+                android:layout_weight=".5"
+                android:background="@drawable/example">
 
             </ImageView>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".25">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/camera_preview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".65"
-        >
+                <TextView
+                    android:id="@+id/textTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="00:00:00"
+                    android:textSize="36sp" />
+            </FrameLayout>
 
 
-    </FrameLayout>
+        </LinearLayout>
 
-    <LinearLayout
+        <FrameLayout
+            android:id="@+id/camera_preview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".65">
 
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_weight=".05"
-        android:layout_height="match_parent">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".225"/>
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@tools:sample/avatars" />
+        </FrameLayout>
 
-        <Button
-            android:id="@+id/btnChangeCamera"
-            android:layout_width="32dp"
-            android:layout_height="0dp"
+        <LinearLayout
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight=".05"
-            android:background="@drawable/flip_front"
-            android:layout_gravity="center_horizontal"/>
+            android:orientation="vertical">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".225" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".225" />
 
-        <Button
-            android:id="@+id/btnRecordVideo"
-            android:layout_width="32dp"
-            android:layout_height="0dp"
-            android:layout_weight=".05"
-            android:layout_gravity="center_horizontal"
+            <Button
+                android:id="@+id/btnChangeCamera"
+                android:layout_width="32dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight=".05"
+                android:background="@drawable/flip_front" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".225" />
+
+            <Button
+                android:id="@+id/btnRecordVideo"
+                android:layout_width="32dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight=".05"
 
 
-            android:background="@drawable/video_camera" />
+                android:background="@drawable/video_camera" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".45" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".45" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
 </RelativeLayout>

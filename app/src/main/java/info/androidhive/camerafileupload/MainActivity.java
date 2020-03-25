@@ -5,6 +5,7 @@ package info.androidhive.camerafileupload;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -16,6 +17,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.graphics.Color;
@@ -23,11 +25,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -84,6 +88,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
 
     int whichCamera=1;
     int maxSize=1080;
+    int width=0,height=0;
     private boolean isRecording = false;
 
     @Override
@@ -128,16 +133,15 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         }
 
         mCamera = getCameraInstance(whichCamera);
-
-
         Camera.Parameters params = mCamera.getParameters();
+
+        //Set autofocus
         List<String> focusModes = params.getSupportedFocusModes();
         if (focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
             // Autofocus mode is supported
             params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-            mCamera.setParameters(params);
         }
-
+        mCamera.setParameters(params);
         List<Camera.Size> sizeList = mCamera.getParameters().getSupportedVideoSizes();
         if (sizeList.get(0).height>=1080) {
             Log.d("Camera","Set record quality to 1080");
@@ -152,11 +156,15 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             maxSize=480;
         }
 
-
         // Create our Preview view and set it as the content of our activity.
         mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
+
+
+
+        //Log.d("Genius","Height: "+preview.getMeasuredHeight());
+
 
     }
 
@@ -171,7 +179,6 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
 
 
         mCamera = getCameraInstance(whichCamera);
-
 
         Camera.Parameters params = mCamera.getParameters();
         List<String> focusModes = params.getSupportedFocusModes();
