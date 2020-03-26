@@ -28,12 +28,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -74,6 +76,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
     private Uri fileUri; // file url to store image/video
 
     private Button btnRecordVideo,btnChangeCamera;
+    private Chronometer simpleChronometer;
 
     private static int act;
     private static String username, password;
@@ -87,8 +90,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
 
 
     int whichCamera=1;
-    int maxSize=1080;
-    int width=0,height=0;
+    int maxSize=480;
     private boolean isRecording = false;
 
     @Override
@@ -133,6 +135,8 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         }
 
         mCamera = getCameraInstance(whichCamera);
+        //mCamera=Camera.open();
+
         Camera.Parameters params = mCamera.getParameters();
 
         //Set autofocus
@@ -142,17 +146,18 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
         }
         mCamera.setParameters(params);
+
         List<Camera.Size> sizeList = mCamera.getParameters().getSupportedVideoSizes();
         if (sizeList.get(0).height>=1080) {
-            Log.d("Camera","Set record quality to 1080");
+            Log.d("Genius","Set record quality to 1080");
             maxSize=1080;
         }
         else if(sizeList.get(0).height<1080&&sizeList.get(0).height>=720){
-            Log.d("Camera","Set record quality to 720");
+            Log.d("Genius","Set record quality to 720");
             maxSize=720;
         }
         else{
-            Log.d("Camera","Set record quality to 480");
+            Log.d("Genius","Set record quality to 480");
             maxSize=480;
         }
 
@@ -179,6 +184,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
 
 
         mCamera = getCameraInstance(whichCamera);
+        //mCamera=Camera.open();
 
         Camera.Parameters params = mCamera.getParameters();
         List<String> focusModes = params.getSupportedFocusModes();
@@ -200,6 +206,10 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         // btnCapturePicture = (Button) findViewById(R.id.btnCapturePicture);
         btnRecordVideo = (Button) findViewById(R.id.btnRecordVideo);
         btnChangeCamera = (Button)findViewById(R.id.btnChangeCamera);
+        simpleChronometer = (Chronometer)findViewById(R.id.simpleChronometer);
+        simpleChronometer.setText("00:00:00");
+        simpleChronometer.setFormat("00:%s");
+
     }
     private void initListener(){
 
@@ -372,6 +382,9 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
                 // inform the user that recording has started
                 //btnRecordVideo.setText("停止");
                 btnRecordVideo.setBackgroundResource(R.drawable.video_camera_work);
+
+                simpleChronometer.setBase(SystemClock.elapsedRealtime());
+                simpleChronometer.start();
                 //setCaptureButtonText("Stop");
                 isRecording = true;
             } else {
@@ -422,14 +435,14 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         // Step 2: Set sources
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-
         // Step 3: Set a CamcorderProfile (requires API Level 8 or higher)
+
         if(maxSize==1080)
-            mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_1080P));
+            mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_1080P));
         else if(maxSize==720)
-            mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_720P));
+            mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_720P));
         else
-            mediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_480P));
+            mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_480P));
 
 
         // Step 4: Set output file
