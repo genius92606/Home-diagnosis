@@ -1,6 +1,7 @@
 package info.androidhive.camerafileupload;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,13 +20,26 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.ValueFormatter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import info.androidhive.camerafileupload.Adapter.PatientAdapter;
 import info.androidhive.camerafileupload.Model.Patient;
@@ -37,11 +51,18 @@ public class ResultActivity  extends AppCompatActivity {
 
     private static int act;
     private static String username, password;
+    private int DATA_COUNT = 5;
+    private LineChart chart;
+
+    List<Entry> chartData = new ArrayList<>();
+    List<String> chartLabels = new ArrayList<>();
+    List<LineDataSet> dataSets = new ArrayList<>();
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
 
 
         Intent i = getIntent();
@@ -54,6 +75,7 @@ public class ResultActivity  extends AppCompatActivity {
 
         initView();
         initListener();
+        initchart();
 
     }
 
@@ -70,6 +92,12 @@ public class ResultActivity  extends AppCompatActivity {
 
     }
 
+    private void initchart()
+    {
+        chart=(LineChart)findViewById(R.id.chart);
+        // enable touch gestures
+
+    }
 
     private void showList(){
         Log.d("SQL server","start show list");
@@ -82,16 +110,34 @@ public class ResultActivity  extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
                             JSONArray array = obj.getJSONArray("patient");
                             Log.d("SQL server",String.valueOf(array.length()));
+
+                            Patient ppp = new Patient("名字","完成度","時間");
+                            patientList.add(ppp);
+
                             for ( int i = 0; i<array.length();i++){
                                 JSONObject patientObj = array.getJSONObject(i);
+                                Log.d("SQL server",patientObj.getString("Name")+" "+patientObj.getString("Complete")+" "+patientObj.getString("Time"));
 
-                                if(patientObj.getString("Name").equals("Genius"))
+                                if(patientObj.getString("Name").equals(username))
                                 {
-                                    Patient p = new Patient(patientObj.getString("Name"),patientObj.getString("Score"),patientObj.getString("Time"));
+                                    Patient p = new Patient(patientObj.getString("Name"),patientObj.getString("Complete"),patientObj.getString("Time"));
                                     patientList.add(p);
+                                    //draw
+
+                                    chartData.add(new Entry(Float.valueOf(patientObj.getString("Complete")), i));
+                                    chartLabels.add(patientObj.getString("Time"));
+
+
+                                    //draw
                                 }
 
                             }
+                            LineDataSet dataSetA = new LineDataSet(chartData, "Genius");
+
+                            dataSets.add(dataSetA); // add the datasets
+                            //chart.getDescription().setText("Description of my chart");
+                            chart.setDescription(null);
+                            chart.setData(new LineData(chartLabels, dataSets));
                             PatientAdapter adapter = new PatientAdapter(patientList,getApplication());
                             listView.setAdapter(adapter);
                         } catch (JSONException e){
@@ -112,5 +158,30 @@ public class ResultActivity  extends AppCompatActivity {
         Handler.getInstance(getApplicationContext()).addToRequestQue(stringRequest);
     }
 
+
+    private List<Entry> getChartData(){
+
+        List<Entry> chartData = new ArrayList<>();
+        for(int i=0;i<DATA_COUNT;i++){
+            chartData.add(new Entry(i*2, i));
+        }
+        return chartData;
+    }
+    private List<String> getLabels(){
+        List<String> chartLabels = new ArrayList<>();
+        for(int i=0;i<DATA_COUNT;i++){
+            chartLabels.add("X"+i);
+        }
+        return chartLabels;
+    }
+
+    private LineData getLineData(){
+        LineDataSet dataSetA = new LineDataSet(getChartData(), "LabelA");
+
+        List<LineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(dataSetA); // add the datasets
+
+        return new LineData(getLabels(), dataSets);
+    }
 
 }
