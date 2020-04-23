@@ -79,8 +79,9 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
     private Chronometer simpleChronometer;
 
     private static int act;
-    private static String username, password;
+    private static String username, password, direction;
 
+    private static String timeStamp;
 
 
     private Camera mCamera;
@@ -106,6 +107,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         act = i.getIntExtra("act",0);
         username = i.getStringExtra("username");
         password = i.getStringExtra("password");
+        direction = i.getStringExtra("direction");
         activity = this;
         initView();
         initListener();
@@ -610,6 +612,10 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         Intent i = new Intent(MainActivity.this, UploadActivity.class);
         i.putExtra("filePath", fileUri.getPath());
         i.putExtra("isImage", isImage);
+        i.putExtra("username",username);
+        i.putExtra("act",act);
+        i.putExtra("direction",direction);
+        i.putExtra("time",timeStamp);
         i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(i);
     }
@@ -647,7 +653,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         }
 
         // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd",
+        timeStamp = new SimpleDateFormat("yyyyMMdd",
                 Locale.getDefault()).format(new Date());
         /*String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
                 Locale.getDefault()).format(new Date());*/
@@ -661,7 +667,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             /*mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + "VID_" + timeStamp + ".mp4");*/
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + username + "_Motion" + act + "_" + timeStamp + ".mp4");
+                    + username + "_Motion" + act + "_" + direction + "_" + timeStamp + ".mp4");
         } else {
             return null;
         }

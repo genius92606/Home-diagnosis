@@ -13,7 +13,7 @@ public class ChooseActivity extends AppCompatActivity {
     private Button btnRecord;
     private Button btnResult;
     private static int act;
-    private static String username, password;
+    private static String username, password, direction;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -26,6 +26,7 @@ public class ChooseActivity extends AppCompatActivity {
         act = i.getIntExtra("act",0);
         username = i.getStringExtra("username");
         password = i.getStringExtra("password");
+        direction= i.getStringExtra("direction");
 
         initView();
         initListener();
@@ -63,6 +64,7 @@ public class ChooseActivity extends AppCompatActivity {
         i.putExtra("act", act);
         i.putExtra("username",username);
         i.putExtra("password",password);
+        i.putExtra("direction",direction);
         i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(i);
     }
@@ -71,6 +73,7 @@ public class ChooseActivity extends AppCompatActivity {
         i.putExtra("act", act);
         i.putExtra("username",username);
         i.putExtra("password",password);
+        i.putExtra("direction",direction);
         i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(i);
     }

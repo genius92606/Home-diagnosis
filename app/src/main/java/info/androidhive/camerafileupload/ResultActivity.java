@@ -51,12 +51,15 @@ public class ResultActivity  extends AppCompatActivity {
 
     private static int act;
     private static String username, password;
-    private int DATA_COUNT = 5;
-    private LineChart chart;
+    private int DATA_COUNT = 0;
+    private LineChart complete_chart,fluency_chart;
 
-    List<Entry> chartData = new ArrayList<>();
-    List<String> chartLabels = new ArrayList<>();
-    List<LineDataSet> dataSets = new ArrayList<>();
+    List<Entry> complete_chartData = new ArrayList<>();
+    List<String> complete_chartLabels = new ArrayList<>();
+    List<LineDataSet> complete_dataSets = new ArrayList<>();
+    List<Entry> fluency_chartData = new ArrayList<>();
+    List<String> fluency_chartLabels = new ArrayList<>();
+    List<LineDataSet> fluency_dataSets = new ArrayList<>();
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -94,7 +97,8 @@ public class ResultActivity  extends AppCompatActivity {
 
     private void initchart()
     {
-        chart=(LineChart)findViewById(R.id.chart);
+        complete_chart=(LineChart)findViewById(R.id.complete_chart);
+        fluency_chart=(LineChart)findViewById(R.id.fluency_chart);
         // enable touch gestures
 
     }
@@ -111,8 +115,8 @@ public class ResultActivity  extends AppCompatActivity {
                             JSONArray array = obj.getJSONArray("patient");
                             Log.d("SQL server",String.valueOf(array.length()));
 
-                            Patient ppp = new Patient("名字","完成度","時間");
-                            patientList.add(ppp);
+                            Patient title = new Patient("名字","完成度","順暢度","時間");
+                            patientList.add(title);
 
                             for ( int i = 0; i<array.length();i++){
                                 JSONObject patientObj = array.getJSONObject(i);
@@ -120,24 +124,31 @@ public class ResultActivity  extends AppCompatActivity {
 
                                 if(patientObj.getString("Name").equals(username))
                                 {
-                                    Patient p = new Patient(patientObj.getString("Name"),patientObj.getString("Complete"),patientObj.getString("Time"));
+                                    Patient p = new Patient(patientObj.getString("Name"),patientObj.getString("Complete"),patientObj.getString("Fluency"),patientObj.getString("Time"));
                                     patientList.add(p);
                                     //draw
 
-                                    chartData.add(new Entry(Float.valueOf(patientObj.getString("Complete")), i));
-                                    chartLabels.add(patientObj.getString("Time"));
+                                    complete_chartData.add(new Entry(Float.valueOf(patientObj.getString("Complete")), DATA_COUNT));
+                                    complete_chartLabels.add(patientObj.getString("Time"));
+                                    fluency_chartData.add(new Entry(Float.valueOf(patientObj.getString("Fluency")), DATA_COUNT));
+                                    fluency_chartLabels.add(patientObj.getString("Time"));
+                                    DATA_COUNT++;
 
 
                                     //draw
                                 }
 
                             }
-                            LineDataSet dataSetA = new LineDataSet(chartData, "Genius");
+                            LineDataSet dataSetA = new LineDataSet(complete_chartData, "完成度折線圖");
+                            complete_dataSets.add(dataSetA); // add the datasets
+                            complete_chart.setDescription(null);
+                            complete_chart.setData(new LineData(complete_chartLabels, complete_dataSets));
+                            LineDataSet dataSetB = new LineDataSet(fluency_chartData, "流暢度折現圖");
+                            fluency_dataSets.add(dataSetB); // add the datasets
+                            fluency_chart.setDescription(null);
+                            fluency_chart.setData(new LineData(fluency_chartLabels, fluency_dataSets));
 
-                            dataSets.add(dataSetA); // add the datasets
-                            //chart.getDescription().setText("Description of my chart");
-                            chart.setDescription(null);
-                            chart.setData(new LineData(chartLabels, dataSets));
+
                             PatientAdapter adapter = new PatientAdapter(patientList,getApplication());
                             listView.setAdapter(adapter);
                         } catch (JSONException e){
@@ -159,29 +170,6 @@ public class ResultActivity  extends AppCompatActivity {
     }
 
 
-    private List<Entry> getChartData(){
 
-        List<Entry> chartData = new ArrayList<>();
-        for(int i=0;i<DATA_COUNT;i++){
-            chartData.add(new Entry(i*2, i));
-        }
-        return chartData;
-    }
-    private List<String> getLabels(){
-        List<String> chartLabels = new ArrayList<>();
-        for(int i=0;i<DATA_COUNT;i++){
-            chartLabels.add("X"+i);
-        }
-        return chartLabels;
-    }
-
-    private LineData getLineData(){
-        LineDataSet dataSetA = new LineDataSet(getChartData(), "LabelA");
-
-        List<LineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(dataSetA); // add the datasets
-
-        return new LineData(getLabels(), dataSets);
-    }
 
 }

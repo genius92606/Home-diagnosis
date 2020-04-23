@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Server測試</string>
+    <string name="app_name">居家復健</string>
     <string name="btnTakePicture">拍照</string>
     <string name="btnRecordVideo">錄影</string>
     <string name="changeCamera">切換</string>

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import info.androidhive.camerafileupload.Model.Patient;
@@ -29,12 +31,14 @@ public class PatientAdapter extends ArrayAdapter<Patient> {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.row_item,null,true);
         TextView nama = (TextView) view.findViewById(R.id.name);
-        TextView score = (TextView) view.findViewById(R.id.score);
+        TextView complete_score = (TextView) view.findViewById(R.id.complete_score);
+        TextView fluency_score = (TextView) view.findViewById(R.id.fluency_score);
         TextView time = (TextView) view.findViewById(R.id.time);
 
         Patient patient = patientList.get(position);
         nama.setText(patient.getNama());
-        score.setText(patient.getScore());
+        complete_score.setText(patient.getCompleteScore());
+        fluency_score.setText(patient.getFluencyScore());
         time.setText(patient.getTime());
 
         return view;

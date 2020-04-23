@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +19,8 @@ public class ActionActivity extends AppCompatActivity {
     private Button btnAction3;private Button btnAction7;
     private Button btnAction4;private Button btnAction8;
 
-    private String username, password;
+    private Switch which_hand;
+    private String username, password, direction;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -29,6 +32,7 @@ public class ActionActivity extends AppCompatActivity {
         // image or video path that is captured in previous activity
         username = i.getStringExtra("username");
         password = i.getStringExtra("password");
+        direction="Left";
 
         initView();
         initListener();
@@ -40,6 +44,7 @@ public class ActionActivity extends AppCompatActivity {
         btnAction2 = (Button) findViewById(R.id.action2);btnAction6 = (Button) findViewById(R.id.action6);
         btnAction3 = (Button) findViewById(R.id.action3);btnAction7 = (Button) findViewById(R.id.action7);
         btnAction4 = (Button) findViewById(R.id.action4);btnAction8 = (Button) findViewById(R.id.action8);
+        which_hand = (Switch) findViewById(R.id.which_hand);
     }
     private void initListener(){
 
@@ -108,6 +113,19 @@ public class ActionActivity extends AppCompatActivity {
             }
         });
 
+        which_hand.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    which_hand.setText("右手");
+                    direction="Right";
+                }else {
+                    which_hand.setText("左手");
+                    direction="Left";
+                }
+            }
+        });
+
     }
 
     private void prepareRecord(int act) {
@@ -115,6 +133,7 @@ public class ActionActivity extends AppCompatActivity {
         i.putExtra("act", act);
         i.putExtra("username",username);
         i.putExtra("password",password);
+        i.putExtra("direction",direction);
         i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(i);
     }

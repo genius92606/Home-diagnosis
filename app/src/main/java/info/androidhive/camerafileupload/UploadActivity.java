@@ -50,6 +50,9 @@ public class UploadActivity extends Activity {
     private Button btnUpload;
     long totalSize = 0;
 
+    private int act;
+    private String username,direction, time;
+
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,10 @@ public class UploadActivity extends Activity {
         i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         // image or video path that is captured in previous activity
         filePath = i.getStringExtra("filePath");
-
+        username = i.getStringExtra("username");
+        act = i.getIntExtra("act",0);
+        direction = i.getStringExtra("direction");
+        time=i.getStringExtra("time");
         // boolean flag to identify the media type, image or video
         boolean isImage = i.getBooleanExtra("isImage", true);
 
@@ -200,10 +206,12 @@ public class UploadActivity extends Activity {
 
                 // Adding file data to http body
                 entity.addPart("image", new FileBody(sourceFile));
-
+                entity.addPart("username",new StringBody(username));
                 // Extra parameters if you want to pass to server
-               // entity.addPart("website", new StringBody("www.androidhive.info"));
-                //entity.addPart("email", new StringBody("abc@gmail.com"));
+                entity.addPart("act",
+                        new StringBody(String.valueOf(act)));
+                entity.addPart("direction", new StringBody(direction));
+                entity.addPart("time",new StringBody(time));
 
                 totalSize = entity.getContentLength();
 
