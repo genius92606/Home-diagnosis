@@ -50,7 +50,7 @@ public class ResultActivity  extends AppCompatActivity {
     List<Patient> patientList;
 
     private static int act;
-    private static String username, password;
+    private static String username, password, direction;
     private int DATA_COUNT = 0;
     private LineChart complete_chart,fluency_chart;
 
@@ -74,6 +74,7 @@ public class ResultActivity  extends AppCompatActivity {
         // image or video path that is captured in previous activity
         username = i.getStringExtra("username");
         password = i.getStringExtra("password");
+        direction = i.getStringExtra("direction");
 
 
         initView();
@@ -120,10 +121,12 @@ public class ResultActivity  extends AppCompatActivity {
 
                             for ( int i = 0; i<array.length();i++){
                                 JSONObject patientObj = array.getJSONObject(i);
-                                Log.d("SQL server",patientObj.getString("Name")+" "+patientObj.getString("Complete")+" "+patientObj.getString("Time"));
 
-                                if(patientObj.getString("Name").equals(username))
+
+                                if(patientObj.getString("Name").equals(username) && patientObj.getString("Direction").equals(direction) && patientObj.getInt("Action")==act)
                                 {
+                                    Log.d("SQL server",patientObj.getString("Name")+" "+patientObj.getString("Complete")+" "+patientObj.getString("Time"));
+                                    Log.d("SQL server",patientObj.getString("Direction")+", "+patientObj.getString("Action"));
                                     Patient p = new Patient(patientObj.getString("Name"),patientObj.getString("Complete"),patientObj.getString("Fluency"),patientObj.getString("Time"));
                                     patientList.add(p);
                                     //draw

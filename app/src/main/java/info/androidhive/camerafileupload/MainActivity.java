@@ -90,7 +90,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
 
 
 
-    int whichCamera=1;
+    int whichCamera=0;
     int maxSize=480;
     private boolean isRecording = false;
 
@@ -142,6 +142,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         Camera.Parameters params = mCamera.getParameters();
 
         //Set autofocus
+        /*
         List<String> focusModes = params.getSupportedFocusModes();
         if (focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
             // Autofocus mode is supported
@@ -162,7 +163,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             Log.d("Genius","Set record quality to 480");
             maxSize=480;
         }
-
+*/
         // Create our Preview view and set it as the content of our activity.
         mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
