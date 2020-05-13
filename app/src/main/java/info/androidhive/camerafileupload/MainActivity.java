@@ -39,6 +39,7 @@ import android.widget.Chronometer;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -87,10 +88,10 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
     private Camera mCamera;
     private MediaRecorder mediaRecorder;
     private CameraPreview mPreview;
+    private TextView title;
 
 
-
-    int whichCamera=0;
+    int whichCamera=1;
     int maxSize=480;
     private boolean isRecording = false;
 
@@ -142,7 +143,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         Camera.Parameters params = mCamera.getParameters();
 
         //Set autofocus
-        /*
+
         List<String> focusModes = params.getSupportedFocusModes();
         if (focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
             // Autofocus mode is supported
@@ -163,7 +164,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             Log.d("Genius","Set record quality to 480");
             maxSize=480;
         }
-*/
+
         // Create our Preview view and set it as the content of our activity.
         mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
@@ -212,7 +213,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         simpleChronometer = (Chronometer)findViewById(R.id.simpleChronometer);
         simpleChronometer.setText("00:00:00");
         simpleChronometer.setFormat("00:%s");
-
+        title = (TextView)findViewById(R.id.textView2);
     }
     private void initListener(){
 
@@ -241,6 +242,10 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
                 changeCamera();
             }
         });
+        if (direction.equals("Left"))
+            title.setText("動作"+act+"  左手");
+        else
+            title.setText("動作"+act+"  右手");
     }
 
     private File createImageFile() throws IOException {

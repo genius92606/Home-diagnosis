@@ -53,6 +53,7 @@ public class ResultActivity  extends AppCompatActivity {
     private static String username, password, direction;
     private int DATA_COUNT = 0;
     private LineChart complete_chart,fluency_chart;
+    private TextView title;
 
     List<Entry> complete_chartData = new ArrayList<>();
     List<String> complete_chartLabels = new ArrayList<>();
@@ -86,6 +87,7 @@ public class ResultActivity  extends AppCompatActivity {
     private void initView(){
 
         listView = (ListView) findViewById(R.id.patient_data);
+        title = (TextView)findViewById(R.id.resultTitle);
         patientList = new ArrayList<>();
 
         Log.d("SQL server","Before showlist");
@@ -94,6 +96,10 @@ public class ResultActivity  extends AppCompatActivity {
     }
     private void initListener(){
 
+        if (direction.equals("Left"))
+            title.setText("動作"+act+"  左手");
+        else
+            title.setText("動作"+act+"  右手");
     }
 
     private void initchart()

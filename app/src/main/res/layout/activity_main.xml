@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="動作示範"
-                    android:textSize="18sp" />
+                    android:textSize="30sp" />
             </FrameLayout>
 
             <ImageView
