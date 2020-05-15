@@ -95,6 +95,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
     int maxSize=480;
     private boolean isRecording = false;
 
+    int tempSize=0;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,11 +153,18 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         mCamera.setParameters(params);
 
         List<Camera.Size> sizeList = mCamera.getParameters().getSupportedVideoSizes();
-        if (sizeList.get(0).height>=1080) {
+        for (int a = 0; a < sizeList.size(); a++) {
+
+            if (tempSize<sizeList.get(a).height)
+                tempSize=sizeList.get(a).height;
+            Log.d("Camera", String.valueOf(sizeList.get(a).width) + ", " + sizeList.get(a).height);
+        }
+
+        if (tempSize>=1080) {
             Log.d("Genius","Set record quality to 1080");
             maxSize=1080;
         }
-        else if(sizeList.get(0).height<1080&&sizeList.get(0).height>=720){
+        else if(tempSize<1080&&tempSize>=720){
             Log.d("Genius","Set record quality to 720");
             maxSize=720;
         }
@@ -301,18 +309,21 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         }
         mCamera = getCameraInstance(whichCamera);
         List<Camera.Size> sizeList = mCamera.getParameters().getSupportedVideoSizes();
-        /*        String[] textArray = new String[sizeList.size()];
-        for (int i = 0; i < sizeList.size(); i++) {
-            textArray[i] = String.valueOf(sizeList.get(i).width) + ", " + sizeList.get(i).height;
-            Log.d("Camera", textArray[i]);
-        }*/
 
-        if (sizeList.get(0).height>=1080)
+        for (int i = 0; i < sizeList.size(); i++) {
+
+            if (tempSize<sizeList.get(i).height)
+                tempSize=sizeList.get(i).height;
+            Log.d("Camera", String.valueOf(sizeList.get(i).width) + ", " + sizeList.get(i).height);
+        }
+
+
+        if (tempSize>=1080)
         {
             Log.d("Camera","Set record quality to 1080");
             maxSize=1080;
         }
-        else if(sizeList.get(0).height<1080&&sizeList.get(0).height>=720){
+        else if(tempSize<1080&&tempSize>=720){
             Log.d("Camera","Set record quality to 720");
             maxSize=720;
         }
