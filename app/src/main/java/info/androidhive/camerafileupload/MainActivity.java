@@ -27,6 +27,7 @@ import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.MediaStore;
@@ -45,6 +46,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+
+import com.bumptech.glide.Glide;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
@@ -89,6 +92,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
     private MediaRecorder mediaRecorder;
     private CameraPreview mPreview;
     private TextView title;
+    private ImageView action;
 
 
     int whichCamera=1;
@@ -222,6 +226,35 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         simpleChronometer.setText("00:00:00");
         simpleChronometer.setFormat("00:%s");
         title = (TextView)findViewById(R.id.textView2);
+        action= (ImageView)findViewById(R.id.imageView3);
+        switch(act) {
+            case 1:
+                Glide.with(this).load(R.drawable.action1).fitCenter().into(action);
+                break;
+            case 2:
+                Glide.with(this).load(R.drawable.action2).fitCenter().into(action);
+                break;
+            case 3:
+                Glide.with(this).load(R.drawable.action3).fitCenter().into(action);
+                break;
+            case 4:
+                Glide.with(this).load(R.drawable.action4).fitCenter().into(action);
+                break;
+            case 5:
+                Glide.with(this).load(R.drawable.action5).fitCenter().into(action);
+                break;
+            case 6:
+                Glide.with(this).load(R.drawable.action6).fitCenter().into(action);
+                break;
+            case 7:
+                Glide.with(this).load(R.drawable.action7).fitCenter().into(action);
+                break;
+            case 8:
+                Glide.with(this).load(R.drawable.action8).fitCenter().into(action);
+                break;
+
+        }
+
     }
     private void initListener(){
 
@@ -392,25 +425,60 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             launchUploadActivity(false);
 
         } else {
-            // initialize video camera
-            if (prepareVideoRecorder()) {
-                // Camera is available and unlocked, MediaRecorder is prepared,
-                // now you can start recording
-                mediaRecorder.start();
 
-                // inform the user that recording has started
-                //btnRecordVideo.setText("停止");
-                btnRecordVideo.setBackgroundResource(R.drawable.video_camera_work);
+            new CountDownTimer(10000, 1000) {
 
-                simpleChronometer.setBase(SystemClock.elapsedRealtime());
-                simpleChronometer.start();
-                //setCaptureButtonText("Stop");
-                isRecording = true;
-            } else {
-                // prepare didn't work, release the camera
-                releaseMediaRecorder();
-                // inform user
-            }
+                public void onTick(long millisUntilFinished) {
+                    simpleChronometer.setText("將於 " + millisUntilFinished / 1000 + " 秒後開始錄影");
+                    //here you can have your logic to set text to edittext
+                }
+
+                public void onFinish() {
+                    //simpleChronometer.setText("錄影開始!");
+                    // initialize video camera
+                    if (prepareVideoRecorder()) {
+                        // Camera is available and unlocked, MediaRecorder is prepared,
+                        // now you can start recording
+                        mediaRecorder.start();
+
+                        new CountDownTimer(10000, 1000) {
+
+                            public void onTick(long millisUntilFinished) {
+                                simpleChronometer.setText("錄影將在 " + millisUntilFinished / 1000 + " 秒後結束");
+                            }
+
+                            public void onFinish() {
+                                if(isRecording== true)
+                                {
+                                    mediaRecorder.stop();  // stop the recording
+                                    releaseMediaRecorder(); // release the MediaRecorder object
+                                    mCamera.lock();         // take camera access back from MediaRecorder
+                                    btnRecordVideo.setBackgroundResource(R.drawable.video_camera);
+                                    isRecording = false;
+                                    launchUploadActivity(false);
+                                }
+
+                            }
+
+                        }.start();
+                        // inform the user that recording has started
+                        //btnRecordVideo.setText("停止");
+                        btnRecordVideo.setBackgroundResource(R.drawable.video_camera_work);
+
+                        //simpleChronometer.setBase(SystemClock.elapsedRealtime());
+                        //simpleChronometer.start();
+                        //setCaptureButtonText("Stop");
+                        isRecording = true;
+
+                    } else {
+                        // prepare didn't work, release the camera
+                        releaseMediaRecorder();
+                        // inform user
+                    }
+                }
+
+            }.start();
+
         }
 
 
@@ -439,6 +507,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
 
         //startActivityForResult(new Intent(MainActivity.this, TakePicActivity.class), GetPhotoCode);
     }
+
 
     private boolean prepareVideoRecorder(){
 

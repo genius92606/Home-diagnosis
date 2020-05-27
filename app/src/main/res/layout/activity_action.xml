@@ -10,77 +10,49 @@
         android:id="@+id/which_hand"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight=".06"
         android:layout_gravity="center_horizontal"
-        android:text="左手" />
+        android:layout_weight=".06"
+        android:text="左手"
+        android:textSize="20sp" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_height="0dp"
-        android:layout_weight=".47"
-        >
 
-        <Button
+        android:layout_weight=".4"
+        android:orientation="horizontal">
+
+        <ImageButton
             android:id="@+id/action1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight=".2"
-            android:background="@drawable/example"
-            android:gravity="bottom|right"
-            android:text="動作1"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:layout_marginStart="20dp" />
 
-        <Button
+            android:layout_weight=".25"
+            android:background="@null"
+             />
+
+        <ImageButton
             android:id="@+id/action2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight=".2"
-            android:background="@drawable/example"
-            android:gravity="bottom|right"
-            android:text="動作2"
-            android:textColor="#000000"
-            android:textSize="18sp" />
+            android:layout_weight=".25"
+            android:background="@null" />
 
-        <Button
+        <ImageButton
             android:id="@+id/action3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight=".2"
-            android:background="@drawable/example"
-            android:gravity="bottom|right"
-            android:text="動作3"
-            android:textColor="#000000"
-            android:textSize="18sp" />
 
-        <Button
+            android:layout_weight=".25"
+            android:background="@null" />
+
+        <ImageButton
             android:id="@+id/action4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight=".2"
-            android:background="@drawable/example"
-            android:gravity="bottom|right"
-            android:text="動作4"
-            android:textColor="#000000"
-            android:textSize="18sp" />
+
+            android:layout_weight=".25"
+            android:background="@null" />
 
 
     </LinearLayout>
@@ -88,71 +60,117 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-
-        android:layout_marginBottom="20dp"
-        android:layout_weight=".47"
+        android:layout_weight=".07"
         android:orientation="horizontal">
 
-        <Button
+
+        <TextView
+            android:id="@+id/action_text1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center_horizontal"
+            android:text="動作一" />
+        <TextView
+            android:id="@+id/action_text2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center_horizontal"
+            android:text="動作二" />
+        <TextView
+            android:id="@+id/action_text3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center_horizontal"
+            android:text="動作三" />
+        <TextView
+            android:id="@+id/action_text4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center_horizontal"
+            android:text="動作四" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".4"
+        android:orientation="horizontal">
+
+        <ImageButton
             android:id="@+id/action5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight=".2"
-            android:background="@drawable/example"
-            android:gravity="bottom|right"
-            android:text="動作5"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:layout_marginStart="20dp" />
 
-        <Button
+            android:layout_weight=".25"
+            android:background="@null" />
+
+        <ImageButton
             android:id="@+id/action6"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight=".2"
-            android:background="@drawable/example"
-            android:gravity="bottom|right"
-            android:text="動作6"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:layout_marginStart="20dp" />
 
-        <Button
+            android:layout_weight=".25"
+            android:background="@null" />
+
+        <ImageButton
             android:id="@+id/action7"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight=".2"
-            android:background="@drawable/example"
-            android:gravity="bottom|right"
-            android:text="動作7"
-            android:textColor="#000000"
-            android:textSize="18sp" />
 
-        <Button
+            android:layout_weight=".25"
+            android:background="@null" />
+
+        <ImageButton
             android:id="@+id/action8"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight=".2"
-            android:background="@drawable/example"
-            android:gravity="bottom|right"
-            android:text="動作8"
-            android:textColor="#000000"
-            android:textSize="18sp" />
+
+            android:layout_weight=".25"
+            android:background="@null" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".07"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/action_text5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center_horizontal"
+            android:text="動作五" />
+        <TextView
+            android:id="@+id/action_text6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center_horizontal"
+            android:text="動作六" />
+        <TextView
+            android:id="@+id/action_text7"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center_horizontal"
+            android:text="動作七" />
+        <TextView
+            android:id="@+id/action_text8"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:gravity="center_horizontal"
+            android:text="動作八" />
+
+    </LinearLayout>
+
 </LinearLayout>
