@@ -95,7 +95,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
     private ImageView action;
 
 
-    int whichCamera=1;
+    int whichCamera=0;
     int maxSize=480;
     private boolean isRecording = false;
 
@@ -128,10 +128,6 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             finish();
         }
 
-
-
-
-
         String[] perms = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO};
         if(EasyPermissions.hasPermissions(this,perms)){
             Toast.makeText(this,"打開攝影機",Toast.LENGTH_SHORT).show();
@@ -142,10 +138,12 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             EasyPermissions.requestPermissions(this, "We need permissions because this and that",123,perms);
         }
 
+
         mCamera = getCameraInstance(whichCamera);
         //mCamera=Camera.open();
 
         Camera.Parameters params = mCamera.getParameters();
+
 
         //Set autofocus
 
@@ -154,15 +152,31 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             // Autofocus mode is supported
             params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
         }
-        mCamera.setParameters(params);
 
-        List<Camera.Size> sizeList = mCamera.getParameters().getSupportedVideoSizes();
-        for (int a = 0; a < sizeList.size(); a++) {
 
-            if (tempSize<sizeList.get(a).height)
-                tempSize=sizeList.get(a).height;
-            Log.d("Camera", String.valueOf(sizeList.get(a).width) + ", " + sizeList.get(a).height);
+
+        //Get video record quality (afo-bot should quit this)
+
+        if (params.getSupportedVideoSizes() != null) {
+            List<Camera.Size> sizeList = params.getSupportedVideoSizes();
+            for (int a = 0; a < sizeList.size(); a++) {
+
+                if (tempSize<sizeList.get(a).height)
+                    tempSize=sizeList.get(a).height;
+                Log.d("Camera", String.valueOf(sizeList.get(a).width) + ", " + sizeList.get(a).height);
+            }
+        } else {
+            // Video sizes may be null, which indicates that all the supported
+            // preview sizes are supported for video recording.
+            List<Camera.Size> sizeList = params.getSupportedPreviewSizes();
+            for (int a = 0; a < sizeList.size(); a++) {
+
+                if (tempSize<sizeList.get(a).height)
+                    tempSize=sizeList.get(a).height;
+                Log.d("Camera", String.valueOf(sizeList.get(a).width) + ", " + sizeList.get(a).height);
+            }
         }
+
 
         if (tempSize>=1080) {
             Log.d("Genius","Set record quality to 1080");
@@ -176,6 +190,14 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             Log.d("Genius","Set record quality to 480");
             maxSize=480;
         }
+
+
+
+
+
+
+        mCamera.setParameters(params);
+
 
         // Create our Preview view and set it as the content of our activity.
         mPreview = new CameraPreview(this, mCamera);
@@ -223,7 +245,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         btnRecordVideo = (Button) findViewById(R.id.btnRecordVideo);
         btnChangeCamera = (Button)findViewById(R.id.btnChangeCamera);
         simpleChronometer = (Chronometer)findViewById(R.id.simpleChronometer);
-        simpleChronometer.setText("00:00:00");
+        simpleChronometer.setText("按錄影機開始錄影");
         simpleChronometer.setFormat("00:%s");
         title = (TextView)findViewById(R.id.textView2);
         action= (ImageView)findViewById(R.id.imageView3);
@@ -426,7 +448,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
 
         } else {
 
-            new CountDownTimer(10000, 1000) {
+            new CountDownTimer(3000, 1000) {
 
                 public void onTick(long millisUntilFinished) {
                     simpleChronometer.setText("將於 " + millisUntilFinished / 1000 + " 秒後開始錄影");
@@ -524,13 +546,15 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
         // Step 3: Set a CamcorderProfile (requires API Level 8 or higher)
-
+/*
         if(maxSize==1080)
             mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_1080P));
         else if(maxSize==720)
             mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_720P));
         else
             mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_480P));
+*/
+        mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_480P));
 
 
         // Step 4: Set output file
