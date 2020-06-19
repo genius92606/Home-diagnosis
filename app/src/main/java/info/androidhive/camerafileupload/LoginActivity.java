@@ -1,6 +1,7 @@
 package info.androidhive.camerafileupload;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,12 +31,14 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import info.androidhive.camerafileupload.Adapter.PatientAdapter;
 import info.androidhive.camerafileupload.Model.Patient;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
-
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks{
 
     private Button btnCertify;
     private EditText username;
@@ -49,9 +53,20 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+
         initView();
         initListener();
 
+        String[] perms = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO};
+        if(EasyPermissions.hasPermissions(this,perms)){
+
+            // Create an instance of Camera
+
+
+        }else{
+            EasyPermissions.requestPermissions(this, "我們需要這些權限來啟動錄影功能!",123,perms);
+        }
        // listView = (ListView) findViewById(R.id.listView);
 
 
@@ -160,4 +175,15 @@ public class LoginActivity extends AppCompatActivity{
             return false;
     }
 
+    @Override
+    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+        if(EasyPermissions.somePermissionPermanentlyDenied(this,perms)){
+            new AppSettingsDialog.Builder(this).build().show();
+        }
+    }
 }

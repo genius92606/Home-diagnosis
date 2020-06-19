@@ -102,10 +102,13 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
     int tempSize=0;
     @Override
 
+
     protected void onCreate(Bundle savedInstanceState) {
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Intent i = getIntent();
         i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -128,85 +131,87 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             finish();
         }
 
+
         String[] perms = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO};
         if(EasyPermissions.hasPermissions(this,perms)){
             Toast.makeText(this,"打開攝影機",Toast.LENGTH_SHORT).show();
             // Create an instance of Camera
+            mCamera = getCameraInstance(whichCamera);
+            //mCamera=Camera.open();
+
+            Camera.Parameters params = mCamera.getParameters();
+
+
+            //Set autofocus
+
+            List<String> focusModes = params.getSupportedFocusModes();
+            if (focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
+                // Autofocus mode is supported
+                params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+            }
+
+
+
+            //Get video record quality (afo-bot should quit this)
+
+            if (params.getSupportedVideoSizes() != null) {
+                List<Camera.Size> sizeList = params.getSupportedVideoSizes();
+                for (int a = 0; a < sizeList.size(); a++) {
+
+                    if (tempSize<sizeList.get(a).height)
+                        tempSize=sizeList.get(a).height;
+                    Log.d("Camera", String.valueOf(sizeList.get(a).width) + ", " + sizeList.get(a).height);
+                }
+            } else {
+                // Video sizes may be null, which indicates that all the supported
+                // preview sizes are supported for video recording.
+                List<Camera.Size> sizeList = params.getSupportedPreviewSizes();
+                for (int a = 0; a < sizeList.size(); a++) {
+
+                    if (tempSize<sizeList.get(a).height)
+                        tempSize=sizeList.get(a).height;
+                    Log.d("Camera", String.valueOf(sizeList.get(a).width) + ", " + sizeList.get(a).height);
+                }
+            }
+
+
+            if (tempSize>=1080) {
+                Log.d("Genius","Set record quality to 1080");
+                maxSize=1080;
+            }
+            else if(tempSize<1080&&tempSize>=720){
+                Log.d("Genius","Set record quality to 720");
+                maxSize=720;
+            }
+            else{
+                Log.d("Genius","Set record quality to 480");
+                maxSize=480;
+            }
+
+
+
+
+
+
+            mCamera.setParameters(params);
+
+
+            // Create our Preview view and set it as the content of our activity.
+            mPreview = new CameraPreview(this, mCamera);
+            FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+            preview.addView(mPreview);
+
+
+
+            //Log.d("Genius","Height: "+preview.getMeasuredHeight());
 
 
         }else{
-            EasyPermissions.requestPermissions(this, "We need permissions because this and that",123,perms);
-        }
-
-
-        mCamera = getCameraInstance(whichCamera);
-        //mCamera=Camera.open();
-
-        Camera.Parameters params = mCamera.getParameters();
-
-
-        //Set autofocus
-
-        List<String> focusModes = params.getSupportedFocusModes();
-        if (focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
-            // Autofocus mode is supported
-            params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+            EasyPermissions.requestPermissions(this, "您在一開始的登入畫面允許開啟權限了嗎?\n 我們需要這些權限來啟動錄影功能!",123,perms);
         }
 
 
 
-        //Get video record quality (afo-bot should quit this)
-
-        if (params.getSupportedVideoSizes() != null) {
-            List<Camera.Size> sizeList = params.getSupportedVideoSizes();
-            for (int a = 0; a < sizeList.size(); a++) {
-
-                if (tempSize<sizeList.get(a).height)
-                    tempSize=sizeList.get(a).height;
-                Log.d("Camera", String.valueOf(sizeList.get(a).width) + ", " + sizeList.get(a).height);
-            }
-        } else {
-            // Video sizes may be null, which indicates that all the supported
-            // preview sizes are supported for video recording.
-            List<Camera.Size> sizeList = params.getSupportedPreviewSizes();
-            for (int a = 0; a < sizeList.size(); a++) {
-
-                if (tempSize<sizeList.get(a).height)
-                    tempSize=sizeList.get(a).height;
-                Log.d("Camera", String.valueOf(sizeList.get(a).width) + ", " + sizeList.get(a).height);
-            }
-        }
-
-
-        if (tempSize>=1080) {
-            Log.d("Genius","Set record quality to 1080");
-            maxSize=1080;
-        }
-        else if(tempSize<1080&&tempSize>=720){
-            Log.d("Genius","Set record quality to 720");
-            maxSize=720;
-        }
-        else{
-            Log.d("Genius","Set record quality to 480");
-            maxSize=480;
-        }
-
-
-
-
-
-
-        mCamera.setParameters(params);
-
-
-        // Create our Preview view and set it as the content of our activity.
-        mPreview = new CameraPreview(this, mCamera);
-        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
-
-
-
-        //Log.d("Genius","Height: "+preview.getMeasuredHeight());
 
 
     }
@@ -221,22 +226,33 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         initListener();
 
 
-        mCamera = getCameraInstance(whichCamera);
-        //mCamera=Camera.open();
+        String[] perms = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO};
+        if(EasyPermissions.hasPermissions(this,perms)){
 
-        Camera.Parameters params = mCamera.getParameters();
-        List<String> focusModes = params.getSupportedFocusModes();
-        if (focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
-            // Autofocus mode is supported
-            params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-            mCamera.setParameters(params);
+            // Create an instance of Camera
+            mCamera = getCameraInstance(whichCamera);
+            //mCamera=Camera.open();
+
+            Camera.Parameters params = mCamera.getParameters();
+            List<String> focusModes = params.getSupportedFocusModes();
+            if (focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
+                // Autofocus mode is supported
+                params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+                mCamera.setParameters(params);
+            }
+
+
+            // Create our Preview view and set it as the content of our activity.
+            mPreview = new CameraPreview(this, mCamera);
+            FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+            preview.addView(mPreview);
+
+
+        }else{
+            EasyPermissions.requestPermissions(this, "您在一開始的登入畫面允許開啟權限了嗎?\n 我們需要這些權限來啟動錄影功能!",123,perms);
         }
 
 
-        // Create our Preview view and set it as the content of our activity.
-        mPreview = new CameraPreview(this, mCamera);
-        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
     }
 
     private void initView(){
@@ -335,9 +351,9 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         if (getApplicationContext().getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_CAMERA)) {
             int numbers=Camera.getNumberOfCameras();
-            Toast.makeText(getApplicationContext(),
+            /*Toast.makeText(getApplicationContext(),
                     String.valueOf(numbers), Toast.LENGTH_LONG)
-                    .show();
+                    .show();*/
             // this device has a camera
             return true;
         } else {
@@ -448,7 +464,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
 
         } else {
 
-            new CountDownTimer(3000, 1000) {
+            new CountDownTimer(6000, 1000) {
 
                 public void onTick(long millisUntilFinished) {
                     simpleChronometer.setText("將於 " + millisUntilFinished / 1000 + " 秒後開始錄影");
@@ -463,7 +479,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
                         // now you can start recording
                         mediaRecorder.start();
 
-                        new CountDownTimer(10000, 1000) {
+                        new CountDownTimer(6000, 1000) {
 
                             public void onTick(long millisUntilFinished) {
                                 simpleChronometer.setText("錄影將在 " + millisUntilFinished / 1000 + " 秒後結束");
