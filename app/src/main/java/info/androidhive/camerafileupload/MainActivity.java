@@ -95,7 +95,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
     private ImageView action;
 
 
-    int whichCamera=0;
+    int whichCamera=1;
     int maxSize=480;
     private boolean isRecording = false;
 
@@ -327,22 +327,6 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
             title.setText("動作"+act+"  右手");
     }
 
-    private File createImageFile() throws IOException {
-        String timeStamp =
-                new SimpleDateFormat("yyyyMMdd_HHmmss",
-                        Locale.getDefault()).format(new Date());
-        String imageFileName = "IMG_" + timeStamp + "_";
-        File storageDir =
-                getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        imageFilePath = image.getAbsolutePath();
-        return image;
-    }
 
     /**
      * Checking device has camera hardware or not
@@ -410,19 +394,6 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         preview.addView(mPreview);
     }
 
-    /**
-     * Launching camera app to capture image
-     */
-    private void captureImage() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
-
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        // start the image capture Intent
-        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
-    }
 
     /**
      * Launching camera app to record video
@@ -562,15 +533,15 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
         // Step 3: Set a CamcorderProfile (requires API Level 8 or higher)
-/*
+
         if(maxSize==1080)
             mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_1080P));
         else if(maxSize==720)
             mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_720P));
         else
             mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_480P));
-*/
-        mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_480P));
+
+        //mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_480P));
 
 
         // Step 4: Set output file
@@ -704,35 +675,8 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
                         .show();
             }
         }
-        if (requestCode == GetPhotoCode) {
-            setPic(fileUri.getPath());
-        }
+
     }
-
-    private void setPic(String mCurrentPhotoPath) {
-        // Get the dimensions of the View
-        int targetW = mShowImage.getWidth();
-        int targetH = mShowImage.getHeight();
-
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW / targetW, photoH / targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-        bmOptions.inPurgeable = true;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        mShowImage.setImageBitmap(bitmap);
-    }
-
 
     private void launchUploadActivity(boolean isImage){
         Intent i = new Intent(MainActivity.this, UploadActivity.class);

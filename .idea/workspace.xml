@@ -7,7 +7,7 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Camera" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88584eef-f4b0-4484-9686-a353374a61a5" name="Default Changelist" comment="">
@@ -15,19 +15,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +29,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="GB8ZARYG8Q" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="HA10CWR6" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -48,31 +39,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="480" selection-start-line="480" selection-end-line="480" />
+            <state relative-caret-position="912">
+              <caret line="256" lean-forward="true" selection-start-line="256" selection-end-line="256" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7307#8954#0" />
-                <element signature="e#8959#9658#0" />
-                <element signature="e#9664#10284#0" />
-                <element signature="e#10235#10834#0" />
-                <element signature="e#10892#12285#0" />
-                <element signature="e#12291#12757#0" />
-                <element signature="e#16932#18810#0" />
-                <element signature="e#18816#19064#0" />
-                <element signature="e#19070#19397#0" />
-                <element signature="e#19595#19948#0" />
-                <element signature="e#19954#20329#0" />
-                <element signature="e#20335#20572#0" />
-                <element signature="e#20580#22540#0" />
-                <element signature="e#22546#23492#0" />
-                <element signature="e#23499#23957#0" />
-                <element signature="e#24040#24338#0" />
-                <element signature="e#24344#25911#0" />
-                <element signature="e#25919#26234#0" />
+                <element signature="e#2834#6592#0" />
+                <element signature="e#6598#7946#0" />
+                <element signature="e#7952#9599#0" />
+                <element signature="e#9604#10303#0" />
+                <element signature="e#10935#11534#0" />
+                <element signature="e#11541#12934#0" />
+                <element signature="e#13412#17572#0" />
+                <element signature="e#17579#19457#0" />
+                <element signature="e#19463#19711#0" />
+                <element signature="e#19717#20044#0" />
+                <element signature="e#20050#20236#0" />
+                <element signature="e#20242#20595#0" />
+                <element signature="e#20601#20976#0" />
+                <element signature="e#20982#21219#0" />
+                <element signature="e#21227#23187#0" />
+                <element signature="e#24146#24604#0" />
+                <element signature="e#24687#24985#0" />
+                <element signature="e#24991#26558#0" />
+                <element signature="e#26566#26881#0" />
+                <element signature="e#26886#26987#0" />
+                <element signature="e#26993#27239#0" />
               </folding>
             </state>
           </provider>
@@ -81,7 +75,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
+            <state relative-caret-position="627">
               <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -100,11 +94,11 @@
           <provider editor-type-id="android-manifest" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" column="35" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="35" />
+            <state relative-caret-position="209">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -182,8 +176,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>stringRequest</find>
-      <find>patientList</find>
       <find>username</find>
       <find>background</find>
       <find>intent</find>
@@ -197,7 +189,6 @@
       <find>recordvideo</find>
       <find>isrecording</find>
       <find>simplechronometer</find>
-      <find>setpic</find>
       <find>onactivityre</find>
       <find>launch</find>
       <find>maxsize</find>
@@ -212,6 +203,9 @@
       <find>permission</find>
       <find>toast</find>
       <find>10000</find>
+      <find>setpic</find>
+      <find>requestcode</find>
+      <find>onSaveInstanceState</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -256,9 +250,9 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/CameraPreview.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/LoginActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -276,8 +270,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -298,7 +292,19 @@
             </path>
             <path>
               <item name="CameraFileUpload" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java (generated)" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="CameraFileUpload" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="CameraFileUpload" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
@@ -441,13 +447,13 @@
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" sideWeight="0.89605546" weight="0.33152762" />
-      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.48400852" weight="0.31419286" />
+      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.48400852" visible="true" weight="0.31419286" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.4968017" weight="0.32827735" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.4978678" weight="0.4225352" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.51599145" side_tool="true" weight="0.31419286" />
       <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.4989339" weight="0.329718" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.760661" visible="true" weight="0.2611051" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.760661" weight="0.2611051" />
       <window_info anchor="bottom" id="Android Profiler" order="8" sideWeight="0.4989339" weight="0.3275488" />
       <window_info anchor="bottom" id="Find" order="9" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
@@ -713,6 +719,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/ResultActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1121">
@@ -754,63 +785,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="209">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/camerafileupload/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="480" selection-start-line="480" selection-end-line="480" />
+        <state relative-caret-position="912">
+          <caret line="256" lean-forward="true" selection-start-line="256" selection-end-line="256" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7307#8954#0" />
-            <element signature="e#8959#9658#0" />
-            <element signature="e#9664#10284#0" />
-            <element signature="e#10235#10834#0" />
-            <element signature="e#10892#12285#0" />
-            <element signature="e#12291#12757#0" />
-            <element signature="e#16932#18810#0" />
-            <element signature="e#18816#19064#0" />
-            <element signature="e#19070#19397#0" />
-            <element signature="e#19595#19948#0" />
-            <element signature="e#19954#20329#0" />
-            <element signature="e#20335#20572#0" />
-            <element signature="e#20580#22540#0" />
-            <element signature="e#22546#23492#0" />
-            <element signature="e#23499#23957#0" />
-            <element signature="e#24040#24338#0" />
-            <element signature="e#24344#25911#0" />
-            <element signature="e#25919#26234#0" />
+            <element signature="e#2834#6592#0" />
+            <element signature="e#6598#7946#0" />
+            <element signature="e#7952#9599#0" />
+            <element signature="e#9604#10303#0" />
+            <element signature="e#10935#11534#0" />
+            <element signature="e#11541#12934#0" />
+            <element signature="e#13412#17572#0" />
+            <element signature="e#17579#19457#0" />
+            <element signature="e#19463#19711#0" />
+            <element signature="e#19717#20044#0" />
+            <element signature="e#20050#20236#0" />
+            <element signature="e#20242#20595#0" />
+            <element signature="e#20601#20976#0" />
+            <element signature="e#20982#21219#0" />
+            <element signature="e#21227#23187#0" />
+            <element signature="e#24146#24604#0" />
+            <element signature="e#24687#24985#0" />
+            <element signature="e#24991#26558#0" />
+            <element signature="e#26566#26881#0" />
+            <element signature="e#26886#26987#0" />
+            <element signature="e#26993#27239#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="35" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="35" />
         </state>
       </provider>
     </entry>
