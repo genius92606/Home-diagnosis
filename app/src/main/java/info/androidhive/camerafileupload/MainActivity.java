@@ -95,7 +95,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
     private ImageView action;
 
 
-    int whichCamera=1;
+    int whichCamera=0;
     int maxSize=480;
     private boolean isRecording = false;
 
@@ -534,14 +534,15 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
         // Step 3: Set a CamcorderProfile (requires API Level 8 or higher)
 
+/*
         if(maxSize==1080)
             mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_1080P));
         else if(maxSize==720)
             mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_720P));
         else
             mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_480P));
-
-        //mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_480P));
+*/
+        mediaRecorder.setProfile(CamcorderProfile.get(whichCamera,CamcorderProfile.QUALITY_480P));
 
 
         // Step 4: Set output file
@@ -723,10 +724,10 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
         }
 
         // Create a media file name
-        timeStamp = new SimpleDateFormat("yyyyMMdd",
-                Locale.getDefault()).format(new Date());
-        /*String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+        /*timeStamp = new SimpleDateFormat("yyyyMMdd",
                 Locale.getDefault()).format(new Date());*/
+        timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
 
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
