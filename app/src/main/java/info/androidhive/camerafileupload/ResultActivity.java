@@ -112,7 +112,7 @@ public class ResultActivity  extends AppCompatActivity {
 
     private void showList(){
         Log.d("SQL server","start show list");
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://140.116.67.148/AndroidFileUpload/sql.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://140.116.70.173/AndroidFileUpload/sql.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

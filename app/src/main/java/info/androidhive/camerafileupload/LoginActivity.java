@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements EasyPermissions.
 
     private boolean checkName(){
         Log.d("SQL server","start checking name");
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://140.116.67.148/AndroidFileUpload/login.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://140.116.70.173/AndroidFileUpload/login.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

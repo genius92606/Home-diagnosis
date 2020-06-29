@@ -450,7 +450,7 @@ public class MainActivity extends Activity implements EasyPermissions.Permission
                         // now you can start recording
                         mediaRecorder.start();
 
-                        new CountDownTimer(6000, 1000) {
+                        new CountDownTimer(8000, 1000) {
 
                             public void onTick(long millisUntilFinished) {
                                 simpleChronometer.setText("錄影將在 " + millisUntilFinished / 1000 + " 秒後結束");
